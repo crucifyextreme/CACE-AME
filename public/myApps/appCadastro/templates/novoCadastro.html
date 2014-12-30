@@ -1,10 +1,111 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
 
-</body>
-</html>
+<div ng-controller="ControllerCadastro" ng-init="iniciaDados()">
+
+    <div class="row">
+        <div class="col-md-4">
+            <span style="font-weight: bold; color: #cccccc; font-size: 25px;"> Informações Básicas </span>
+        </div>
+    </div>
+
+    <form style="margin-top: 15px;">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="nome_instituicao">Nome da Instituição</label>
+                    <input type="text" class="form-control" id="nome_instituicao" ng-model="item.NOME_INSTITUICAO">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="sigla">Sigla</label>
+                    <input type="text" class="form-control" id="sigla" ng-model="item.SIGLA" ng-disabled="!item.NOME_INSTITUICAO">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="cnpj">CNPJ</label>
+                    <input type="text" class="form-control" id="cnpj" ng-model="item.CNPJ" ng-disabled="!item.SIGLA">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <input type="text" class="form-control" id="cep" ng-model="item.CEP" ng-disabled="!item.CNPJ">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="endereco">Endereço</label>
+                    <input type="text" class="form-control" id="endereco" ng-model="item.ENDERECO" ng-disabled="!item.CEP">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" ng-model="item.BAIRRO" ng-disabled="!item.ENDERECO">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="numero">Numero</label>
+                    <input type="text" class="form-control" id="numero" ng-model="item.NUMERO" ng-disabled="!item.BAIRRO">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pais">País</label>
+                    <select class="form-control" id="pais" ng-model="item.PAIS" ng-disabled="!item.NUMERO">
+                        <option value="brasil">Brasil</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="regiao">Região</label>
+                    <select class="form-control" id="regiao" ng-model="item.REGIAO" ng-change="buscaEstado(item.REGIAO)" ng-disabled="!item.PAIS">
+                        <option value="">Informe</option>
+                        <option value="centro-oeste">Centro-Oeste</option>
+                        <option value="nordeste">Nordeste</option>
+                        <option value="norte">Norte</option>
+                        <option value="sul">Sul</option>
+                        <option value="sudeste">Sudeste</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <select class="form-control" id="estado" ng-model="item.ESTADO" ng-change="consultaCidade(item.ESTADO)" ng-disabled="!item.REGIAO">
+                        <option value="">Informe</option>
+                        <option value="{{estado.uf}}" ng-repeat="estado in estados">{{estado.nome}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <select class="form-control" id="cidade" ng-model="item.CIDADE" ng-disabled="!item.ESTADO">
+                        <option value="">Informe</option>
+                        <option value="{{cidade.nome}}" ng-repeat="cidade in cidades">{{cidade.nome}}</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>

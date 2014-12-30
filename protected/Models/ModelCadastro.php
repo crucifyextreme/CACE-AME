@@ -1,6 +1,6 @@
 <?php
 
-class ModelSac
+class ModelCadastro
 {
 
     protected  $app;
@@ -10,11 +10,15 @@ class ModelSac
         $this->app = $app;
     }
 
-    public function buscaContrato()
+    public function buscaEstados()
     {
-       /**
-        * MODEL
-        */
+        return $this->app["db"]->fetchAll('SELECT *
+                                            FROM tb_estados');
+    }
+    public function buscaCidades($uf)
+    {
+        return $this->app["db"]->fetchAll('SELECT *
+                                            FROM tb_cidades WHERE uf = ? ORDER BY nome ASC', $uf);
     }
 
 } 

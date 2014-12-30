@@ -38,7 +38,7 @@ $app->get('/', function() use ($app) {
     return $app['twig']->render('template.twig');
 });
 
-//$app->mount('/', new Controllers\Cadastro\Cadastro());
+$app->mount('/cace', new Controllers\Cadastro\Cadastro());
 
 
 $app->run();

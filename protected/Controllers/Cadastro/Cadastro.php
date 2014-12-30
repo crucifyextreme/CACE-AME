@@ -19,10 +19,24 @@ class Cadastro implements ControllerProviderInterface
         $cadastro = new ControllerCollection(new Route());
 
         /**
-         * ROTA PRINCIPAL.
+         * ROTA QUE BUSCA TODOS OS ESTADOS NA BASE DE DADOS
          */
-        $cadastro->get('/', function( Request $request ) use ($app) {
-            return "Controller Cadastro Executado";
+        $cadastro->get('/buscaEstados', function( Request $request ) use ($app) {
+            try {
+                return $app->json($app['models']->load('ModelCadastro','buscaEstados'));
+            } catch( \Exception $e) {
+                return $e->getMessage();
+            }
+        });
+        /**
+         * ROTA QUE BUSCA TODAS AS CIDADES NA BASE DE DADOS
+         */
+        $cadastro->get('/buscaCidades', function( Request $request ) use ($app) {
+            try {
+                return $app->json($app['models']->load('ModelCadastro','buscaCidades',array($request->get('uf'))));
+            } catch( \Exception $e) {
+                return $e->getMessage();
+            }
         });
 
 

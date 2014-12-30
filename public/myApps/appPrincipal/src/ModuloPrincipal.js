@@ -7,7 +7,7 @@ appPrincipal
         function($routeProvider) {
             $routeProvider
                 .when('/cadastro', {
-                    templateUrl:'../appPrincipal/templates/cadastro.html'
+                    templateUrl:'../myApps/appPrincipal/templates/cadastro.html'
                 })
                 .otherwise({redirectTo:'/cadastro'});
         }
