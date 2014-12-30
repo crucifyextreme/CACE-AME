@@ -1,4 +1,4 @@
-var appCadastro = angular.module('appCadastro',['ngRoute', 'ngResource'])
+var appCadastro = angular.module('appCadastro',['ngRoute', 'ngResource', 'ui.mask'])
 
 appCadastro
     .config(
